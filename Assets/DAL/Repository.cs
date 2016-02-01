@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-public static class Repository
+﻿public static class Repository
 {
     static IEnemyDatabase enemyDatabase;
     static IItemDataBase itemDatabase;
