@@ -244,4 +244,13 @@ sysinfo.txt
 *.mat
 *.asset
 *.prefab
-*.fxb
+*.fbx
+*.bin
+*.psd
+*.jpg
+*.png
+*.shader
+*.save
+*.anim
+*.controller
+
