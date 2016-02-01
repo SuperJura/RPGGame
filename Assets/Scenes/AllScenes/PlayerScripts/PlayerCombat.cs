@@ -96,6 +96,10 @@ public class PlayerCombat : MonoBehaviour {
         Text ability = btnAb.GetComponentInChildren<Text>();
         ability.text = ab.Name;
 
+        Text staticID = btnAb.transform.Find("AbilityStaticID").GetComponent<Text>();
+        staticID.text = ab.StaticID.ToString();
+
+        Debug.Log(staticID.text);
     }
 
     public void AttackAbility1()

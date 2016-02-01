@@ -1,16 +1,13 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class MouseOverTooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
+public class ItemMouseOverTooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
 
     private IItemDataBase itemDatabase;
     private Canvas parent;
+    private RectTransform panel;
 
-    RectTransform panel;
-
-	// Use this for initialization
 	void Start () {
         panel = GetComponent<RectTransform>();
         itemDatabase = Repository.GetItemDatabaseInstance();

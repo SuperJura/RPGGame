@@ -18,7 +18,6 @@ public class PlayerGUI : MonoBehaviour {
     public float height = 2;
     public Canvas myCanvas;
 
-	// Use this for initialization
 	void Start () {
         CurrentPlayer.currentPlayer.PlayerInventory.OnEquipmentChanged += PlayerInventory_OnEquipmentChanged;
         CurrentPlayer.currentPlayer.PlayerInventory.OnInventoryChanged += PlayerInventory_OnInventoryChanged;
@@ -71,7 +70,7 @@ public class PlayerGUI : MonoBehaviour {
         {
             playerName = "<" + CurrentPlayer.currentPlayer.PlayerName + ">";
         }
-        catch (System.Exception ex)
+        catch (Exception ex)
         {
             playerName = "<Joe>";
             Debug.Log(ex.Message);
