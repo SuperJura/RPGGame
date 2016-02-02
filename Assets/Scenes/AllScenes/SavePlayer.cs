@@ -1,12 +1,10 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
 public class SavePlayer : MonoBehaviour {
 
     private Transform player;
-
 
     public void SavePlayerAndExit()
     {

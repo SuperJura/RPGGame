@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class PlayerMenuControls : MonoBehaviour {
 
@@ -13,7 +12,8 @@ public class PlayerMenuControls : MonoBehaviour {
     public InGameMenuMenager menuManager;
     public InGameMenu EscMenu;
     public InGameMenu InventoryMenu;
-    public GameObject CardMenu;
+    public GameObject CardMenu; //menu je tipa GameObject jer je fullscreen
+    public GameObject AbilityBookMenu;
 
     void Start()
     {
@@ -31,9 +31,8 @@ public class PlayerMenuControls : MonoBehaviour {
         isInGameMenuOpen = false;
     }
 
-	
-	// Update is called once per frame
-	void Update () {
+    void Update () {
+        //samo jedan menu moze biti aktivan na screenu, bilo on fulscreen ili ne
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (isInGameMenuOpen == false)
@@ -71,6 +70,19 @@ public class PlayerMenuControls : MonoBehaviour {
             {
                 menuManager.CloseMenu();
                 isInGameMenuOpen = false;
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            if (IsInGameMenuOpen == false)
+            {
+                menuManager.LoadFullScreenMenu(AbilityBookMenu);
+                IsInGameMenuOpen = true;
+            }
+            else
+            {
+                menuManager.CloseMenu();
+                IsInGameMenuOpen = false;
             }
         }
 	}

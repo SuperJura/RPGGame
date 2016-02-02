@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
-using System;
 using UnityEngine.UI;
 
 public class AbilityMouseOverTooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler{
@@ -19,8 +18,6 @@ public class AbilityMouseOverTooltip : MonoBehaviour, IPointerEnterHandler, IPoi
     {
         abilityBtn.transform.Find("AbilityStaticID").GetComponent<Button>();
         int staticID = int.Parse(abilityBtn.transform.Find("AbilityStaticID").GetComponent<Text>().text);
-        Debug.Log(staticID);
-
         Ability ab = abilityDatabase.GetAbility(staticID);
 
         GameObject go = (GameObject)Resources.Load("AbilityTooltip");

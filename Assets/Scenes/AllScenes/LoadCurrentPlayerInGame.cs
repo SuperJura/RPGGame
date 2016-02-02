@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class LoadCurrentPlayerInGame : MonoBehaviour {
 
     private Player player;
-	// Use this for initialization
+
     void Awake()
     {
         if (CurrentPlayer.currentPlayer == null)
@@ -40,7 +39,7 @@ public class LoadCurrentPlayerInGame : MonoBehaviour {
         player = CurrentPlayer.currentPlayer;
 
         Vector3 newPosition = new Vector3(player.PosX, player.PosY, player.PosZ);
-        this.transform.position = newPosition;
+        transform.position = newPosition;
 
         switch (player.CharClass)
         {
