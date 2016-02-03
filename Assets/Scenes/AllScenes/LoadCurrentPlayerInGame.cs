@@ -10,8 +10,8 @@ public class LoadCurrentPlayerInGame : MonoBehaviour {
         {
             CurrentPlayer.currentPlayer = new Player();
             CurrentPlayer.currentPlayer.PlayerInventory.OnEquipmentChanged += CurrentPlayer.currentPlayer.CalcNewEquiped;
-            CurrentPlayer.currentPlayer.CharClass = Enumerations.CharClass.Warrior;
-            CurrentPlayer.currentPlayer.Class = new WarriorClass();
+            CurrentPlayer.currentPlayer.CharClass = Enumerations.CharClass.Mage;
+            CurrentPlayer.currentPlayer.Class = new MageClass();
             CurrentPlayer.currentPlayer.Gender = Enumerations.Gender.Male;
             CurrentPlayer.currentPlayer.IDLevel = 1;
             CurrentPlayer.currentPlayer.IDPlayer = -1;

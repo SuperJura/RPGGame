@@ -57,10 +57,9 @@ public class CodeAbilityDatabase : IAbilityDatabase
         allWarriorAbilitys.Add(1, new List<Ability>() {abSlash, abHack, abBash, abPummel});
 
         //LEVEL 2
-        Ability abReadySlash = new Ability() { Name = "Ready Slash", Damage = 50, ManaCost = 20, StaticID = 4, Range = 15, Cooldown = 15 };
+        Ability abReadySlash = new Ability() { Name = "Ready Slash", Damage = 50, ManaCost = 20, StaticID = 5, Range = 15, Cooldown = 15 };
         abReadySlash.Description = string.Format("Focus your slash so it does {0} damage", abReadySlash.Damage);
         allWarriorAbilitys.Add(2, new List<Ability>() {abReadySlash});
-
     }
 
     public List<Ability> GetAbilitys(Enumerations.CharClass charClass, int level)

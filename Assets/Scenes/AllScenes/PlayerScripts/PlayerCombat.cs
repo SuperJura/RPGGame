@@ -11,10 +11,10 @@ public class PlayerCombat : MonoBehaviour {
     public event OnTargetHealthChangedHandler OnTargetHealthChanged;
 
     public delegate void OnAbilityFiredHandler(int abilityIndex);
-    public event OnAbilityFiredHandler OnAbiliyFired;   //for GUI (to show it has been pressed)
+    public event OnAbilityFiredHandler OnAbiliyFired;   //za GUI (da se pokaze da je pritisnut)
 
-    public delegate void OnAbilityCooldownHandler(float cooldown, int index);   //cooldown is between 0 and 1 ( 1 means it can be used again)
-    public event OnAbilityCooldownHandler OnAbilityCooldown;    //for GUI (to show cooldown)
+    public delegate void OnAbilityCooldownHandler(float cooldown, int index);   //cooldown je izmedu 0 i 1 ( 1 znaci da se moze koristiti opet)
+    public event OnAbilityCooldownHandler OnAbilityCooldown;    //za GUI (da se pokaze cooldown)
 
     public RectTransform charAbilitys;
 
@@ -40,7 +40,7 @@ public class PlayerCombat : MonoBehaviour {
 
             try
             {
-                information.OnEnemyDeath -= information_OnEnemyDeath;   //makni prijasnjeg enemya 
+                information.OnEnemyDeath -= information_OnEnemyDeath;   //makni prijasnjeg enemya
                 Debug.Log("Uspio sam nekoga maknuti s information_OnEnemyDeath");
             }
             catch (System.Exception)
@@ -54,10 +54,9 @@ public class PlayerCombat : MonoBehaviour {
         }
     }
 
-	// Use this for initialization
-	void Start () {
+    void Start () {
         FillAbilitysGUI();
-	}
+    }
 
     void Update()
     {
@@ -98,8 +97,6 @@ public class PlayerCombat : MonoBehaviour {
 
         Text staticID = btnAb.transform.Find("AbilityStaticID").GetComponent<Text>();
         staticID.text = ab.StaticID.ToString();
-
-        Debug.Log(staticID.text);
     }
 
     public void AttackAbility1()

@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System;
 
 public class MenuGUIs : MonoBehaviour {
 
     public Transform CardItemList;
     public Transform InventoryItemList;  //inventory panel
+    public Transform AbilityBookMenu;
 
     private char selectedOrder; // n=byName, q=byQuality, s=bySlot
 
@@ -16,6 +18,7 @@ public class MenuGUIs : MonoBehaviour {
 
         LoadCardsInCardMenu();
         LoadItemsInInventory();
+        LoadAbilitysInAbilityBook();
     }
 
     //CARD METHODS
@@ -199,5 +202,86 @@ public class MenuGUIs : MonoBehaviour {
     void PlayerInventory_OnInventoryChanged()
     {
         LoadItemsInInventory();
+    }
+
+    //ABILITY METHODS
+
+    private void LoadAbilitysInAbilityBook()
+    {
+        const int MAX_LEVEL = 2;
+        IAbilityDatabase ablityDatabase = Repository.GetAbilityDatabaseInstance();
+        Enumerations.CharClass CharClass = CurrentPlayer.currentPlayer.CharClass;
+        int currentPlayerLevel = CurrentPlayer.currentPlayer.PlayerLvl;
+        int numberOfPages = 1;
+        int numberOfAbilitys = 0;
+
+        RectTransform currentPage = CreateNewPage(1);
+        for (int level = 1; level <= MAX_LEVEL; level++)
+        {
+            foreach (Ability ab in ablityDatabase.GetAbilitys(CharClass, level))
+            {
+                if (numberOfAbilitys >= 6)
+                {
+                    numberOfAbilitys = 0;
+                    numberOfPages++;
+                    currentPage = CreateNewPage(numberOfPages);
+                }
+                CreateNewAbilitySlot(currentPage, ab, level, currentPlayerLevel);
+                numberOfAbilitys++;
+            }
+        }
+    }
+
+    private void CreateNewAbilitySlot(RectTransform currentPage, Ability ab,int abilityLevel, int currentPlayerLevel)
+    {
+        GameObject go = (GameObject)Resources.Load("AbilitySlot");
+        RectTransform prefab = (RectTransform)go.transform;
+        RectTransform abilitySlot = Instantiate(prefab);
+
+        abilitySlot.GetComponentInChildren<Text>().text = ab.Name;
+        abilitySlot.transform.Find("AbilityLevel").GetComponent<Text>().text = abilityLevel.ToString();
+        abilitySlot.Find("AbilityStaticID").GetComponent<Text>().text = ab.StaticID.ToString();
+        abilitySlot.gameObject.AddComponent<AbilityMouseOverTooltip>();
+
+        if (abilityLevel > currentPlayerLevel)
+        {
+            abilitySlot.GetComponent<Button>().interactable = false;
+        }
+        abilitySlot.SetParent(currentPage);
+    }
+
+    private RectTransform CreateNewPage(int pageNumber)
+    {
+        GameObject go = (GameObject)Resources.Load("AbilityBookPage");
+        RectTransform prefab = (RectTransform)go.transform;
+        RectTransform page = Instantiate(prefab);
+        page.SetParent(AbilityBookMenu, false);
+        page.name = "Page" + pageNumber;
+        page.GetComponentInChildren<Text>().text = pageNumber.ToString();
+
+        AddPageButton(pageNumber);
+        return page;
+    }
+
+    private void AddPageButton(int pageNumber)
+    {
+        GameObject go = (GameObject)Resources.Load("AbilityBookPageButton");
+        RectTransform prefab = (RectTransform)go.transform;
+        RectTransform button = Instantiate(prefab);
+
+        button.GetComponentInChildren<Text>().text = pageNumber.ToString();
+        button.SetParent(AbilityBookMenu.Find("AbilityBookPageButtons"));
+
+        button.GetComponent<Button>().onClick.AddListener(() => PageButton_Click(button));
+    }
+
+    private void PageButton_Click(object sender)
+    {
+        RectTransform b = (RectTransform)sender;
+        string pageNumber = b.GetComponent<Button>().GetComponentInChildren<Text>().text;
+
+        RectTransform targetPage = AbilityBookMenu.Find("Page" + pageNumber).GetComponent<RectTransform>();
+        targetPage.SetAsLastSibling();
+
     }
 }
