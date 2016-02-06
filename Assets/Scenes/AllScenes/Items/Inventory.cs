@@ -110,12 +110,10 @@ public class Inventory
     
     
     public delegate void EquipmentChangedHandler(Equipment oldEquip, Equipment newEquip);
-
     [field: NonSerialized]
     public event EquipmentChangedHandler OnEquipmentChanged;
 
     public delegate void InventoryChangedHandler();
-
     [field: NonSerialized]
     public event InventoryChangedHandler OnInventoryChanged;
 
@@ -286,4 +284,3 @@ public class Inventory
     }
 
 }
-

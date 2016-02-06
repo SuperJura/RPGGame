@@ -1,10 +1,10 @@
-﻿using System.Collections;
-using System;
+﻿using System;
 
 [Serializable]
 public class Player
 {
     public delegate void OnStatsChangedHandler();
+    [field: NonSerialized]
     public event OnStatsChangedHandler OnStatsChanged;
 
     public string PathToSave { get; set; }
@@ -93,7 +93,6 @@ public class Player
             CallOnStatsChanged();
         }
     }
-
 
     public Inventory PlayerInventory;
 

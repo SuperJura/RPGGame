@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -35,6 +36,11 @@ public class ItemMouseOverTooltip : MonoBehaviour, IPointerEnterHandler, IPointe
     }
 
     public void OnPointerExit(PointerEventData eventData)
+    {
+        DestroyTooltip();
+    }
+
+    public void DestroyTooltip()
     {
         Destroy(parent.gameObject.transform.Find("ItemTooltip(Clone)").gameObject);
     }

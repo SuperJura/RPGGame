@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 
 [Serializable]
 public class Equipment  {
@@ -11,7 +10,7 @@ public class Equipment  {
         get { return iDEquipment; }
     }
     
-    public string StaticIDEquipment { get; set; }  //static id does not change
+    public string StaticIDEquipment { get; set; }  //static id se ne mjenja
     public string Name { get; set; }
 
     public Enumerations.EquipmentSlot Slot { get; set; }
@@ -53,5 +52,4 @@ public class Equipment  {
 
         return output;
     }
-
 }

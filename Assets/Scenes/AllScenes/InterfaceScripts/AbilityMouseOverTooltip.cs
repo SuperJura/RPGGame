@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -36,6 +37,18 @@ public class AbilityMouseOverTooltip : MonoBehaviour, IPointerEnterHandler, IPoi
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        Destroy(parent.gameObject.transform.Find("AbilityTooltip(Clone)").gameObject);
+        DestroyTooltip();
+    }
+
+    public void DestroyTooltip()
+    {
+        try
+        {
+            Destroy(parent.gameObject.transform.Find("AbilityTooltip(Clone)").gameObject);
+        }
+        catch (Exception ex)
+        {
+            Debug.Log(ex.Message + ": Najvjerojatnije nije postojeo tooltip");
+        }
     }
 }

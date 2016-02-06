@@ -4,11 +4,10 @@ using System.Collections.Generic;
 [Serializable]
 class MageClass : CharacterClass
 {
-    private IAbilityDatabase abilityDatabase;
-    public MageClass()
+    public MageClass()   //abilityDatabase nemoze biti variabla u klasi jer je klasa Serializable
     {
-        abilityDatabase = Repository.GetAbilityDatabaseInstance();
-        listOfCurrentAbilitys = abilityDatabase.GetAbilitys(Enumerations.CharClass.Mage, 1);
+        IAbilityDatabase abilityDatabase = Repository.GetAbilityDatabaseInstance();
+        List<Ability> listOfCurrentAbilitys = abilityDatabase.GetAbilitys(Enumerations.CharClass.Mage, 1);
 
         Ability1 = listOfCurrentAbilitys[0];
         Ability2 = listOfCurrentAbilitys[1];
@@ -18,6 +17,7 @@ class MageClass : CharacterClass
 
     public override List<Ability> GetAbilitysOnLevel(int level)
     {
+        IAbilityDatabase abilityDatabase = Repository.GetAbilityDatabaseInstance();
         return abilityDatabase.GetAbilitys(Enumerations.CharClass.Mage, level);
     }
 }

@@ -246,6 +246,7 @@ public class MenuGUIs : MonoBehaviour {
         if (abilityLevel > currentPlayerLevel)
         {
             abilitySlot.GetComponent<Button>().interactable = false;
+            abilitySlot.GetComponent<AbilityDrag>().enabled = false;
         }
         abilitySlot.SetParent(currentPage);
     }

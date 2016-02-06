@@ -16,8 +16,6 @@ public class PlayerCombat : MonoBehaviour {
     public delegate void OnAbilityCooldownHandler(float cooldown, int index);   //cooldown je izmedu 0 i 1 ( 1 znaci da se moze koristiti opet)
     public event OnAbilityCooldownHandler OnAbilityCooldown;    //za GUI (da se pokaze cooldown)
 
-    public RectTransform charAbilitys;
-
     private EnemyInformation information;
     public EnemyInformation EnemyInfo {
         get
@@ -55,7 +53,6 @@ public class PlayerCombat : MonoBehaviour {
     }
 
     void Start () {
-        FillAbilitysGUI();
     }
 
     void Update()
@@ -76,27 +73,6 @@ public class PlayerCombat : MonoBehaviour {
         {
             AttackAbility4();
         }
-    }
-
-    private void FillAbilitysGUI()
-    {
-        SetAbilityButtonGUI("Ability1", CurrentPlayer.currentPlayer.Class.Ability1);
-        SetAbilityButtonGUI("Ability2", CurrentPlayer.currentPlayer.Class.Ability2);
-        SetAbilityButtonGUI("Ability3", CurrentPlayer.currentPlayer.Class.Ability3);
-        SetAbilityButtonGUI("Ability4", CurrentPlayer.currentPlayer.Class.Ability4);
-    }
-
-    private void SetAbilityButtonGUI(string path, Ability ab)
-    {
-        Button btnAb = charAbilitys.transform.Find(path).GetComponent<Button>();
-        ColorBlock cb = btnAb.colors;
-        btnAb.colors = cb;
-
-        Text ability = btnAb.GetComponentInChildren<Text>();
-        ability.text = ab.Name;
-
-        Text staticID = btnAb.transform.Find("AbilityStaticID").GetComponent<Text>();
-        staticID.text = ab.StaticID.ToString();
     }
 
     public void AttackAbility1()

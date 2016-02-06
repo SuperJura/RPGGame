@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 using System;
 
 public class PlayerGUI : MonoBehaviour {
@@ -12,19 +11,24 @@ public class PlayerGUI : MonoBehaviour {
     private TextMesh myTextMesh;
     private Transform myTransform;
     private PlayerCombat playerCombat;
-    private Transform charAbilitys; //GUI panel for Abilitys
+    private RectTransform charAbilitys; //GUI panel za Abilitys
     private string playerName;
 
     void Start () {
+
+        myTextMesh = GetComponent<TextMesh>();
+        playerCombat = GetComponentInParent<PlayerCombat>();
+        myTransform = GetComponent<Transform>();
+        charAbilitys = myCanvas.transform.Find("CharAbilitys").GetComponent<RectTransform>();
+
         CurrentPlayer.currentPlayer.PlayerInventory.OnEquipmentChanged += PlayerInventory_OnEquipmentChanged;
         CurrentPlayer.currentPlayer.OnStatsChanged += currentPlayer_OnStatsChanged;
-        playerCombat = GetComponentInParent<PlayerCombat>();
         playerCombat.OnTargetChanged += playerCombat_OnTargetFocusChanged;
         playerCombat.OnAbiliyFired += PlayerCombat_OnAbiliyFired;
         playerCombat.OnAbilityCooldown += PlayerCombat_OnAbilityCooldown;
 
-        DisplayNamePlate();
-
+        FillNamePlate();
+        FillAbilitysGUI();
         FillInfoPanel();
 	}
 
@@ -54,10 +58,8 @@ public class PlayerGUI : MonoBehaviour {
         myCanvas.transform.Find("infoPanel/txtMana").GetComponent<Text>().text = mana;
     }
 
-    private void DisplayNamePlate()
+    private void FillNamePlate()
     {
-        myTextMesh = GetComponent<TextMesh>();
-        myTransform = GetComponent<Transform>();
         try
         {
             playerName = "<" + CurrentPlayer.currentPlayer.PlayerName + ">";
@@ -71,6 +73,27 @@ public class PlayerGUI : MonoBehaviour {
         myTransform.position = myTransform.parent.position + new Vector3(0, height, 0);
 
         myTextMesh.text = playerName;
+    }
+
+    public void FillAbilitysGUI()
+    {
+        SetAbilityButtonGUI("Ability1", CurrentPlayer.currentPlayer.Class.Ability1);
+        SetAbilityButtonGUI("Ability2", CurrentPlayer.currentPlayer.Class.Ability2);
+        SetAbilityButtonGUI("Ability3", CurrentPlayer.currentPlayer.Class.Ability3);
+        SetAbilityButtonGUI("Ability4", CurrentPlayer.currentPlayer.Class.Ability4);
+    }
+
+    private void SetAbilityButtonGUI(string path, Ability ab)
+    {
+        Button btnAb = charAbilitys.Find(path).GetComponent<Button>();
+        ColorBlock cb = btnAb.colors;
+        btnAb.colors = cb;
+
+        Text ability = btnAb.GetComponentInChildren<Text>();
+        ability.text = ab.Name;
+
+        Text staticID = btnAb.transform.Find("AbilityStaticID").GetComponent<Text>();
+        staticID.text = ab.StaticID.ToString();
     }
 
     //INVENTORY HANDLERS
