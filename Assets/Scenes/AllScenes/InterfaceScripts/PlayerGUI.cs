@@ -12,6 +12,7 @@ public class PlayerGUI : MonoBehaviour {
     private Transform myTransform;
     private PlayerCombat playerCombat;
     private RectTransform charAbilitys; //GUI panel za Abilitys
+    private Image experienceBar;
     private string playerName;
 
     void Start () {
@@ -20,17 +21,41 @@ public class PlayerGUI : MonoBehaviour {
         playerCombat = GetComponentInParent<PlayerCombat>();
         myTransform = GetComponent<Transform>();
         charAbilitys = myCanvas.transform.Find("CharAbilitys").GetComponent<RectTransform>();
+        experienceBar = myCanvas.transform.Find("ExperienceBar/Experience").GetComponent<Image>();
 
         CurrentPlayer.currentPlayer.PlayerInventory.OnEquipmentChanged += PlayerInventory_OnEquipmentChanged;
         CurrentPlayer.currentPlayer.OnStatsChanged += currentPlayer_OnStatsChanged;
+        CurrentPlayer.currentPlayer.OnLevelUp += CurrentPlayer_OnLevelUp;
         playerCombat.OnTargetChanged += playerCombat_OnTargetFocusChanged;
         playerCombat.OnAbiliyFired += PlayerCombat_OnAbiliyFired;
         playerCombat.OnAbilityCooldown += PlayerCombat_OnAbilityCooldown;
+        playerCombat.OnExperienceGained += PlayerCombat_OnExperienceGained;
 
         FillNamePlate();
         FillAbilitysGUI();
         FillInfoPanel();
+        FillExperienceBar();
 	}
+
+    private void CurrentPlayer_OnLevelUp()
+    {
+        Debug.Log("CurrentPlayer_OnLevelUp");
+        FillInfoPanel();
+        FillExperienceBar();
+    }
+
+    private void PlayerCombat_OnExperienceGained()
+    {
+        FillExperienceBar();
+    }
+
+    private void FillExperienceBar()
+    {
+        float fill = CurrentPlayer.currentPlayer.Experience / (float)CurrentPlayer.currentPlayer.ExperienceForNextLevel;
+        string expText = CurrentPlayer.currentPlayer.Experience + @"/" + CurrentPlayer.currentPlayer.ExperienceForNextLevel + "(exp)";
+        experienceBar.fillAmount = fill;
+        experienceBar.transform.parent.Find("ExperienceText").GetComponent<Text>().text = expText;
+    }
 
     void currentPlayer_OnStatsChanged()
     {

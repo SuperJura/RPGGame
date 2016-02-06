@@ -89,7 +89,7 @@ public class CreatePlayer : MonoBehaviour {
         newPlayer.CurrentMana = 80;
 
         newPlayer.PlayerLvl = 1;
-        newPlayer.Experience = 0;
+        newPlayer.Experience = 550;     //ZA DEBUG
 
         newPlayer.PathToSave = Application.dataPath + "\\Saves\\" + newPlayer.PlayerName + "_" + newPlayer.IDPlayer + ".save";
 

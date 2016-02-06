@@ -28,6 +28,7 @@ public class LoadCurrentPlayerInGame : MonoBehaviour {
             CurrentPlayer.currentPlayer.PosY = 15;
             CurrentPlayer.currentPlayer.PosZ = 0;
             CurrentPlayer.currentPlayer.PlayerLvl = 1;
+            CurrentPlayer.currentPlayer.Experience = 550;
             CurrentPlayer.currentPlayer.PathToSave = Application.dataPath + "\\Saves\\PlayerTest.save";
 
             CurrentPlayer.currentPlayer.PhysDMGMultiplication = 1;

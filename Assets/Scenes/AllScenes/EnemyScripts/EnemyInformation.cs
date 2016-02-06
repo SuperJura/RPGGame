@@ -58,7 +58,7 @@ public class EnemyInformation
         Name = "Generic Enemy";
         Attack = 1;
         Health = 1;
-        ExpGained = 0;
+        ExpGained = 10;
         MaxHealth = 1;
     }
 

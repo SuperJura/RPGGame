@@ -19,8 +19,7 @@ public class EnemyAI : MonoBehaviour {
     public float attackCooldown = 1;
     public float attackRange = 25;
 
-	// Use this for initialization
-	void Start () {
+    void Start () {
         myTransform = GetComponentInParent<Transform>();
         myParent = myTransform.parent;
         currentAttackCooldown = attackCooldown;
@@ -43,7 +42,7 @@ public class EnemyAI : MonoBehaviour {
 
     void information_OnEnemyDeath(EnemyInformation information)
     {
-        this.gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 
     void Update()

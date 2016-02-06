@@ -16,6 +16,9 @@ public class PlayerCombat : MonoBehaviour {
     public delegate void OnAbilityCooldownHandler(float cooldown, int index);   //cooldown je izmedu 0 i 1 ( 1 znaci da se moze koristiti opet)
     public event OnAbilityCooldownHandler OnAbilityCooldown;    //za GUI (da se pokaze cooldown)
 
+    public delegate void OnExperienceGainedHandler();
+    public event OnExperienceGainedHandler OnExperienceGained;
+
     private EnemyInformation information;
     public EnemyInformation EnemyInfo {
         get
@@ -114,6 +117,8 @@ public class PlayerCombat : MonoBehaviour {
     void information_OnEnemyDeath(EnemyInformation information)
     {
         Debug.Log("Neprijatelj je umro: " + information.IdEnemy);
+        CurrentPlayer.currentPlayer.Experience += information.ExpGained;
+        OnExperienceGained();
     }
 	
     public IEnumerator DecreaseAbilityCooldown(Ability ab, int index)

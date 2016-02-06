@@ -5,7 +5,6 @@ public class Enemy : MonoBehaviour {
 
     public string staticID;
     private EnemyInformation information;
-    private EnemyInformationDatabase database;
 
     public EnemyInformation GetEnemyInformation()
     {
@@ -14,7 +13,7 @@ public class Enemy : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-        database = GameObject.Find("GameMenager").GetComponent<EnemyInformationDatabase>();
-        information = database.GetEnemyInformation(staticID);
+        IEnemyDatabase enemyDatabase = Repository.GetEnemyDatabaseInstance();
+        information = enemyDatabase.GetEnemyInformation(staticID);
 	}
 }

@@ -17,7 +17,7 @@ public class CodeEnemyInformationDatabase : IEnemyDatabase
     private void FillDatabase()
     {
         EnemyInformation ei1 = new EnemyInformation() { StaticID = "E_1", Name = "CUbe", Health = 150, MaxHealth = 150,
-            CurrentHealth=150, Attack = 15, ExpGained = 10 };
+            CurrentHealth=150, Attack = 5, ExpGained = 10 };
         ei1.EnemyCard = itemDatabase.GetCard("R_3");
         allEnemys.Add(ei1);
     }

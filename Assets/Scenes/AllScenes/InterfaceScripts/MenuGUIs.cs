@@ -10,11 +10,11 @@ public class MenuGUIs : MonoBehaviour {
     public Transform AbilityBookMenu;
 
     private char selectedOrder; // n=byName, q=byQuality, s=bySlot
-
-    // Use this for initialization
+    
     void Start ()
     {
         CurrentPlayer.currentPlayer.PlayerInventory.OnInventoryChanged += PlayerInventory_OnInventoryChanged;
+        CurrentPlayer.currentPlayer.OnLevelUp += CurrentPlayer_OnLevelUp;
 
         LoadCardsInCardMenu();
         LoadItemsInInventory();
@@ -208,6 +208,7 @@ public class MenuGUIs : MonoBehaviour {
 
     private void LoadAbilitysInAbilityBook()
     {
+        ClearAllChildren();
         const int MAX_LEVEL = 2;
         IAbilityDatabase ablityDatabase = Repository.GetAbilityDatabaseInstance();
         Enumerations.CharClass CharClass = CurrentPlayer.currentPlayer.CharClass;
@@ -229,6 +230,14 @@ public class MenuGUIs : MonoBehaviour {
                 CreateNewAbilitySlot(currentPage, ab, level, currentPlayerLevel);
                 numberOfAbilitys++;
             }
+        }
+    }
+
+    private void ClearAllChildren()
+    {
+        foreach (Transform child in AbilityBookMenu)
+        {
+            Destroy(child.gameObject);
         }
     }
 
@@ -271,7 +280,7 @@ public class MenuGUIs : MonoBehaviour {
         RectTransform button = Instantiate(prefab);
 
         button.GetComponentInChildren<Text>().text = pageNumber.ToString();
-        button.SetParent(AbilityBookMenu.Find("AbilityBookPageButtons"));
+        button.SetParent(AbilityBookMenu.parent.Find("AbilityBookPageButtons"));
 
         button.GetComponent<Button>().onClick.AddListener(() => PageButton_Click(button));
     }
@@ -284,5 +293,10 @@ public class MenuGUIs : MonoBehaviour {
         RectTransform targetPage = AbilityBookMenu.Find("Page" + pageNumber).GetComponent<RectTransform>();
         targetPage.SetAsLastSibling();
 
+    }
+
+    private void CurrentPlayer_OnLevelUp()
+    {
+        LoadAbilitysInAbilityBook();
     }
 }

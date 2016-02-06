@@ -7,6 +7,10 @@ public class Player
     [field: NonSerialized]
     public event OnStatsChangedHandler OnStatsChanged;
 
+    public delegate void OnLevelUpHandler();
+    [field: NonSerialized]
+    public event OnLevelUpHandler OnLevelUp;
+
     public string PathToSave { get; set; }
 
     public int IDLevel { get; set; }
@@ -83,22 +87,36 @@ public class Player
         }
     }
 
-    private float experience;
-    public float Experience
+    private int experience;
+    public int Experience
     {
         get { return experience; }
         set 
         { 
             experience = value;
+            if (experience >= ExperienceForNextLevel)
+            {
+                LevelUp();
+            }
             CallOnStatsChanged();
         }
     }
+
+    public int experienceForNextLevel;
+    public int ExperienceForNextLevel
+    {
+        get { return experienceForNextLevel; }
+        set { experienceForNextLevel = value; }
+    }
+
 
     public Inventory PlayerInventory;
 
     public Player()
     {
         PlayerInventory = new Inventory();
+        ExperienceForNextLevel = 555;
+        experience = 0;
     }
 
     private void CallOnStatsChanged()
@@ -144,5 +162,41 @@ public class Player
     public void RemoveHealth(int amount)
     {
         CurrentHealth -= amount;
+    }
+
+    public void LevelUp()
+    {
+        playerLvl += 1;
+        experience = 0;
+        experienceForNextLevel *= 2;
+        if (CharClass == Enumerations.CharClass.Mage)
+        {
+            LevelUpMage();
+        }
+        else if (CharClass == Enumerations.CharClass.Warrior)
+        {
+            LevelUpWarrior();
+        }
+        OnLevelUp();
+    }
+
+    private void LevelUpWarrior()
+    {
+        MagicDMG += 1;
+        PhysicalDMG += 5;
+        maxHealth += 11;
+        currentHealth = maxHealth;
+        maxMana += 9;
+        currentMana = maxMana;
+    }
+
+    private void LevelUpMage()
+    {
+        MagicDMG += 5;
+        PhysicalDMG += 2;
+        maxHealth += 10;
+        currentHealth = maxHealth;
+        maxMana += 15;
+        currentMana = maxMana;
     }
 }
