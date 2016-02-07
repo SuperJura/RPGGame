@@ -14,7 +14,8 @@ class EnemyLoot : MonoBehaviour
     private IItemDataBase itemDatabase;
     private EnemyInformation information;
     private PlayerCombat playerCombat;
-    private bool canBeTarget;
+    private bool canBeTarget;   //ako je neki menu otvoren, igrac nemoze klikat na njega
+    private int numberOfLoot;
 
     void Start()
     {
@@ -23,6 +24,7 @@ class EnemyLoot : MonoBehaviour
         playerCombat = GameObject.Find("PlayerObject").GetComponent<PlayerCombat>();
         manager.OnMenuClosing += manager_OnMenuClosing;
         canBeTarget = true;
+        numberOfLoot = information.DropLoot.Count;
     }
 
     void manager_OnMenuClosing(object sender)
@@ -37,19 +39,15 @@ class EnemyLoot : MonoBehaviour
     {
         //igrac moze lootati ako:
         //  je enemy mrtav
-        //  stisnu je F ili je kliknuo s ljevim klikom
+        //  kliknuo s ljevim klikom
         //  blizu je enemya
 
-        if (information.IsDead && (Input.GetKeyDown(KeyCode.F) || Input.GetMouseButtonDown(0)))
+        if (information.IsDead && Input.GetMouseButtonDown(0))
         {
             if (canBeTarget == true)
             {
                 float distance = Vector3.Distance(playerCombat.transform.position, playerCombat.TargetForCombat.position);
-                if (distance < 15 && playerCombat.EnemyInfo.IdEnemy == information.IdEnemy) //moze se sa F
-                {
-                    LoadItemsInLootMenu();
-                }
-                else if (distance < 15 && playerCombat.EnemyInfo.IdEnemy == information.IdEnemy)    //ili sa klikom
+                if (distance < 15 && playerCombat.EnemyInfo.IdEnemy == information.IdEnemy)
                 {
                     LoadItemsInLootMenu();
                 }
@@ -73,7 +71,7 @@ class EnemyLoot : MonoBehaviour
             panel.Find("Panel/ItemName").GetComponentInChildren<Text>().text = e.Name;
             panel.Find("Panel/ItemSlot").GetComponentInChildren<Text>().text = e.Slot.ToString();
             panel.Find("Panel/ItemStaticID").GetComponentInChildren<Text>().text = e.StaticIDEquipment.ToString();
-            Toggle tog = (Toggle)panel.Find("Panel/Take").GetComponent<Toggle>();
+            Toggle tog = panel.Find("Panel/Take").GetComponent<Toggle>();
             tog.onValueChanged.AddListener((on) => PutInInventory(panel, tog));
 
             panel.SetParent(itemList);
@@ -95,5 +93,10 @@ class EnemyLoot : MonoBehaviour
         information.RemoveFromDropLoot(staticID);
 
         Destroy(GameObject.Find("ItemTooltip(Clone)").gameObject);
+        numberOfLoot--;
+        if (numberOfLoot == 0)  //ako vise nema nicega za lootanje, disable skriptu
+        {
+            Destroy(gameObject.transform.parent.gameObject);
+        }
     }
 }

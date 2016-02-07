@@ -6,7 +6,6 @@ using System.Xml.Linq;
 
 public class CreatePlayer : MonoBehaviour {
 
-
     public static Player CreateNewPlayer(Enumerations.CharClass charClass, string playerName, Enumerations.Gender M_F)
     {
         if (!Directory.Exists(Application.dataPath + "\\Saves"))
@@ -57,8 +56,6 @@ public class CreatePlayer : MonoBehaviour {
         newPlayer.Experience = 0;
 
         newPlayer.PathToSave = Application.dataPath + "\\Saves\\" + newPlayer.PlayerName + "_" + newPlayer.IDPlayer + ".save";
-
-
         return SerializePlayerToDat(newPlayer);
     }
 
@@ -92,7 +89,6 @@ public class CreatePlayer : MonoBehaviour {
         newPlayer.Experience = 550;     //ZA DEBUG
 
         newPlayer.PathToSave = Application.dataPath + "\\Saves\\" + newPlayer.PlayerName + "_" + newPlayer.IDPlayer + ".save";
-
         return SerializePlayerToDat(newPlayer);
     }
 
@@ -101,8 +97,6 @@ public class CreatePlayer : MonoBehaviour {
         try
         {
             BinaryFormatter bf = new BinaryFormatter();
-
-
             FileStream saveFile = File.Create(newPlayer.PathToSave);
             bf.Serialize(saveFile, newPlayer);
 

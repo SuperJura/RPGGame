@@ -239,6 +239,11 @@ public class MenuGUIs : MonoBehaviour {
         {
             Destroy(child.gameObject);
         }
+        Transform buttons = AbilityBookMenu.parent.Find("AbilityBookPageButtons");
+        foreach (Transform child in buttons)
+        {
+            Destroy(child.gameObject);
+        }
     }
 
     private void CreateNewAbilitySlot(RectTransform currentPage, Ability ab,int abilityLevel, int currentPlayerLevel)

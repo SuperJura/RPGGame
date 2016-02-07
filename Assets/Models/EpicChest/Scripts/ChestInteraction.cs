@@ -13,21 +13,29 @@ public class ChestInteraction : MonoBehaviour {
     private Animation chestAnimation;
     private bool isopen;
 
-	// Use this for initialization
-	void Start () {
+    void Start () {
         itemDatabase = Repository.GetItemDatabaseInstance();
         chestAnimation = GetComponentInParent<Animation>();
         isopen = false;
-	}
+    }
 
     void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Player" && Input.GetKeyDown(KeyCode.F) && isopen == false)
+        if (Input.GetMouseButtonDown(0))
         {
-            chestAnimation.Play("open");
-            LoadItemsInChest();
-            manager.LoadMenu(lootMenu);
-            isopen = true;
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out hit, 100))
+            {
+                if (hit.transform.name == name)
+                {
+                    chestAnimation.Play("open");
+                    LoadItemsInChest();
+                    manager.LoadMenu(lootMenu);
+                    isopen = true;
+                }
+            }
         }
     }
 
@@ -85,5 +93,4 @@ public class ChestInteraction : MonoBehaviour {
             isopen = false;
         }
     }
-	
 }

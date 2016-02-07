@@ -55,9 +55,6 @@ public class PlayerCombat : MonoBehaviour {
         }
     }
 
-    void Start () {
-    }
-
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -106,6 +103,10 @@ public class PlayerCombat : MonoBehaviour {
     {
         if (targetForCombat != null && Vector3.Distance(this.transform.position, targetForCombat.position) < ab.Range && ab.CurrentCooldown <= 0)
         {
+            if (EnemyInfo.IsDead)
+            {
+                return;
+            }
             information.RemoveHealth(ab.Damage, this.gameObject);
             OnTargetChanged(information);
             OnTargetHealthChanged(information);
@@ -120,7 +121,7 @@ public class PlayerCombat : MonoBehaviour {
         CurrentPlayer.currentPlayer.Experience += information.ExpGained;
         OnExperienceGained();
     }
-	
+
     public IEnumerator DecreaseAbilityCooldown(Ability ab, int index)
     {
         ab.CurrentCooldown = ab.Cooldown;

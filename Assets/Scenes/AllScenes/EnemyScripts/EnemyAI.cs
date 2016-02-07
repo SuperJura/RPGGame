@@ -42,6 +42,8 @@ public class EnemyAI : MonoBehaviour {
 
     void information_OnEnemyDeath(EnemyInformation information)
     {
+        Transform particles = myParent.Find("Particles");
+        particles.gameObject.SetActive(true);
         gameObject.SetActive(false);
     }
 

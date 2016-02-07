@@ -27,6 +27,7 @@ public class EnemyInformation
                 if (health <= 0)
                 {
                     OnEnemyDeath(this);
+                    health = 0;
                     IsDead = true;
                 } 
             }
