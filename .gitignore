@@ -241,16 +241,16 @@ sysinfo.txt
 >>>>>>> 70185c15fcde3b23969da393190d24d2f019214d
 
 #Unity3D Files
-*.mat
-*.asset
-*.prefab
-*.fbx
-*.bin
-*.psd
-*.jpg
-*.png
-*.shader
+#*.mat
+#*.asset
+#*.prefab
+#*.fbx
+#*.bin
+#*.psd
+#*.jpg
+#*.png
+#*.shader
 *.save
-*.anim
-*.controller
+#*.anim
+#*.controller
 
