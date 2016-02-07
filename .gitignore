@@ -246,5 +246,6 @@ sysinfo.txt
 #*.png
 #*.shader
 *.save
+*.save.meta
 #*.anim
 #*.controller
