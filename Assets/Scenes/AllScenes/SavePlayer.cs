@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using UnityEngine.SceneManagement;
 
 public class SavePlayer : MonoBehaviour {
 
@@ -17,7 +18,7 @@ public class SavePlayer : MonoBehaviour {
     {
         SavePlayerInDat();
 
-        Application.LoadLevel("MainMenuScene");
+        SceneManager.LoadScene("MainMenuScene");
     }
 
     private void SavePlayerInDat()

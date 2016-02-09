@@ -74,11 +74,11 @@ public class PlayerGUI : MonoBehaviour {
         string PhysDmg = CurrentPlayer.currentPlayer.CalcPhysDMG().ToString();
         myCanvas.transform.Find("infoPanel/txtPhysDmg").GetComponent<Text>().text = PhysDmg;
 
-        string health = "\tHealth\n" + CurrentPlayer.currentPlayer.CurrentHealth +
+        string health = "Health " + CurrentPlayer.currentPlayer.CurrentHealth +
             " / " + CurrentPlayer.currentPlayer.MaxHealth;
         myCanvas.transform.Find("infoPanel/txtHealth").GetComponent<Text>().text = health;
 
-        string mana = "\tMana\n" + CurrentPlayer.currentPlayer.CurrentMana +
+        string mana = "Mana " + CurrentPlayer.currentPlayer.CurrentMana +
             " / " + CurrentPlayer.currentPlayer.MaxMana;
         myCanvas.transform.Find("infoPanel/txtMana").GetComponent<Text>().text = mana;
     }

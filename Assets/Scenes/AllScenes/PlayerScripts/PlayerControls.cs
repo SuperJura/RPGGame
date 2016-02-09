@@ -12,16 +12,14 @@ public class PlayerControls : MonoBehaviour {
 
     public float rotationSpeed = 500;
 
-    private Player playerStats;
-
 	void Start () {
         myTransform = GetComponent<Transform>();
         cameraTransform = Camera.main.transform;
-	}
-	
-	void Update () {
+    }
+
+    void Update () {
         PlayerMovement();
-	}
+    }
 
     private void PlayerMovement()
     {
@@ -91,6 +89,4 @@ public class PlayerControls : MonoBehaviour {
             }
         }
     }
-
-
 }

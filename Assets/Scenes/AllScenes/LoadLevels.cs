@@ -10,19 +10,19 @@ public static class LoadLevels {
 
     public static void LoadLevel(int lvl)
     {
-        Application.LoadLevel("LEVEL_" + lvl);
+        SceneManager.LoadScene("LEVEL_" + lvl);
     }
 
     public static void LoadMainMenu()
     {
-        Application.LoadLevel("MainMenuScene");
+        SceneManager.LoadScene("MainMenuScene");
     }
 
     public static void StartGame(Enumerations.CharClass charClass, string playerName,Enumerations.Gender M_F)
     {
        Player newPlayer = CreatePlayer.CreateNewPlayer(charClass, playerName, M_F);
        CurrentPlayer.currentPlayer = newPlayer;
-       Application.LoadLevel("LEVEL_1");
+        SceneManager.LoadScene("LEVEL_1");
     }
 
     public static void LoadSavedGame(string path)

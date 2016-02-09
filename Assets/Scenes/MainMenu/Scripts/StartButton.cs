@@ -3,8 +3,8 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class StartButton : MonoBehaviour {
-
-    public Text txtClass;
+    
+    public Dropdown ddlClass;
     public Text txtName;
     public Toggle cBoxMale; //ako nije male onda je female
 
@@ -19,12 +19,12 @@ public class StartButton : MonoBehaviour {
             return;
         }
 
-        switch (txtClass.text)
+        switch (ddlClass.value)
         {
-            case "Warrior":
+            case 0:
                 charClass = Enumerations.CharClass.Warrior;
                 break;
-            case "Mage":
+            case 1:
                 charClass = Enumerations.CharClass.Mage;
                 break;
             default:

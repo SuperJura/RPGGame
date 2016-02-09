@@ -80,4 +80,17 @@ public class EnemyInformation
         Health -= amount;
         Focus = attacker;
     }
+
+    public void RemoveHealth(int amount)
+    {
+        CurrentHealth -= amount;
+    }   //za AOE ability-e
+
+    public void RemoveAllSubscriptionToOnEnemyDeath()
+    {
+        if (OnEnemyDeath != null)
+        {
+            OnEnemyDeath = null;
+        }
+    }
 }

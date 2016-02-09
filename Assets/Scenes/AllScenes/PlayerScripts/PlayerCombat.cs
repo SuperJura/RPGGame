@@ -33,21 +33,15 @@ public class PlayerCombat : MonoBehaviour {
         get { return targetForCombat; }
         set
         {
-            if (targetForCombat == value)
+            if (targetForCombat == value)   //ako igrac klikne na emeny-a kojeg vec fokusira, samo izadi
             {
                 return;
             }
+            if (information != null)
+            {
+                information.RemoveAllSubscriptionToOnEnemyDeath();
+            }
             targetForCombat = value;
-
-            try
-            {
-                information.OnEnemyDeath -= information_OnEnemyDeath;   //makni prijasnjeg enemya
-                Debug.Log("Uspio sam nekoga maknuti s information_OnEnemyDeath");
-            }
-            catch (System.Exception)
-            {
-                Debug.Log("Nisam uspio nikoga maknuti s information_OnEnemyDeath");
-            }
             information = (TargetForCombat.GetComponent<Enemy>()).GetEnemyInformation();
             information.OnEnemyDeath += information_OnEnemyDeath;
             
@@ -101,20 +95,20 @@ public class PlayerCombat : MonoBehaviour {
 
     private void AttackWithAbility(Ability ab, int index)
     {
-        if (targetForCombat != null && Vector3.Distance(this.transform.position, targetForCombat.position) < ab.Range && ab.CurrentCooldown <= 0)
+        if (targetForCombat != null && Vector3.Distance(transform.position, targetForCombat.position) < ab.Range && ab.CurrentCooldown <= 0)
         {
             if (EnemyInfo.IsDead)
             {
                 return;
             }
-            information.RemoveHealth(ab.Damage, this.gameObject);
+            information.RemoveHealth(ab.Damage, gameObject);
             OnTargetChanged(information);
             OnTargetHealthChanged(information);
-            StartCoroutine(DecreaseAbilityCooldown(ab, index));
+            StartCoroutine(StartAbilityCooldown(ab, index));
         }
         OnAbiliyFired(index);
     }
-    
+
     void information_OnEnemyDeath(EnemyInformation information)
     {
         Debug.Log("Neprijatelj je umro: " + information.IdEnemy);
@@ -122,7 +116,7 @@ public class PlayerCombat : MonoBehaviour {
         OnExperienceGained();
     }
 
-    public IEnumerator DecreaseAbilityCooldown(Ability ab, int index)
+    public IEnumerator StartAbilityCooldown(Ability ab, int index)
     {
         ab.CurrentCooldown = ab.Cooldown;
         while (ab.CurrentCooldown >= 0)
@@ -133,5 +127,4 @@ public class PlayerCombat : MonoBehaviour {
             yield return new WaitForSeconds(0.05f);
         }
     }
-
 }

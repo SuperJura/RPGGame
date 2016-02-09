@@ -10,7 +10,6 @@
         {
             enemyDatabase = new CodeEnemyInformationDatabase();
         }
-
         return enemyDatabase;
     }
 
@@ -20,7 +19,6 @@
         {
             itemDatabase = new CodeItemDataBase();
         }
-
         return itemDatabase;
     }
 

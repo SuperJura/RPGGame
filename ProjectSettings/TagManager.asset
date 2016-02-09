@@ -18,7 +18,7 @@ TagManager:
   - 
   - NPC_WalkingZone
   - NPC
-  - 
+  - Background
   - 
   - 
   - 
@@ -41,6 +41,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: ForeUI
+    uniqueID: 3987543403
+    locked: 0
+  - name: BackUI
+    uniqueID: 519186603
+    locked: 0
   - name: BackGround
     uniqueID: 1113727713
     locked: 0

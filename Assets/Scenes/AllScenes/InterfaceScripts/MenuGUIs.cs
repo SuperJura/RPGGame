@@ -248,7 +248,7 @@ public class MenuGUIs : MonoBehaviour {
 
     private void CreateNewAbilitySlot(RectTransform currentPage, Ability ab,int abilityLevel, int currentPlayerLevel)
     {
-        GameObject go = (GameObject)Resources.Load("AbilitySlot");
+        GameObject go = (GameObject)Resources.Load("AbilityBookSlot");
         RectTransform prefab = (RectTransform)go.transform;
         RectTransform abilitySlot = Instantiate(prefab);
 

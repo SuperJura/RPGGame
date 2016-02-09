@@ -125,7 +125,6 @@ public class CreatePlayer : MonoBehaviour {
         File.WriteAllText(configPath, doc.ToString());
 
         Directory.CreateDirectory(Application.dataPath + "\\Saves");
-
     }
 
     private static int GetLastPlayerID()
