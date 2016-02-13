@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class PlayerControls : MonoBehaviour {
 
@@ -12,7 +11,7 @@ public class PlayerControls : MonoBehaviour {
 
     public float rotationSpeed = 500;
 
-	void Start () {
+    void Start () {
         myTransform = GetComponent<Transform>();
         cameraTransform = Camera.main.transform;
     }
@@ -58,17 +57,6 @@ public class PlayerControls : MonoBehaviour {
         {
             myTransform.position = myTransform.position + Time.deltaTime * jumpVelocity;
             jumpVelocity = jumpVelocity + Time.deltaTime * gravity * 2;
-        }
-
-        if (Input.GetKey(KeyCode.Mouse0) && (Input.GetAxis("Mouse X") != 0f || Input.GetAxis("Mouse Y") != 0f)) //move camera around
-        {
-            float rotX = Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime;
-            Camera.main.transform.RotateAround(myTransform.position, Vector3.up, rotX);
-
-            float rotY = Input.GetAxis("Mouse Y") * rotationSpeed * Time.deltaTime;
-            cameraTransform.RotateAround(myTransform.position, Vector3.left, rotY);
-
-            cameraTransform.rotation = Quaternion.Euler(cameraTransform.rotation.eulerAngles.x, cameraTransform.rotation.eulerAngles.y, 0);
         }
     }
 

@@ -7,39 +7,48 @@ public class NPCInteraction : MonoBehaviour {
 
     private bool talking;
     private NPCText npcTextData;
+    private Collider player;
+    private bool playerClose;
 
 	// Use this for initialization
 	void Start () {
         npcTextData = GetComponent<NPCText>();
         talking = false;
+        playerClose = false;
 	}
 
-    void OnTriggerStay(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            if (Input.GetKeyDown(KeyCode.F) && talking == false)
-            {
-                Vector3 targetLook = other.transform.position;
-                targetLook.y = this.transform.position.y;
-                this.transform.LookAt(targetLook);
+            player = other;
+            playerClose = true;
+        }
+    }
 
-                GameObject go = new GameObject("txtBubble");
+    void OnMouseDown()
+    {
+        if (talking == false && playerClose == true)
+        {
+            Vector3 targetLook = player.transform.position;
+            targetLook.y = this.transform.position.y;
+            this.transform.LookAt(targetLook);
 
-                TextMesh t = go.AddComponent<TextMesh>();
-                FacingCamera fc = go.AddComponent<FacingCamera>();
-                fc.m_Camera = Camera.main;
+            GameObject go = new GameObject("txtBubble");
 
-                t.text = npcTextData.HelloText;
-                t.anchor = TextAnchor.UpperCenter;
-                t.fontSize = 200;
+            TextMesh t = go.AddComponent<TextMesh>();
+            FacingCamera fc = go.AddComponent<FacingCamera>();
+            fc.m_Camera = Camera.main;
 
-                go.transform.localScale = new Vector3(0.06f, 0.06f, 0.06f);
-                go.transform.SetParent(this.transform);
-                go.transform.position = this.transform.position + new Vector3(0, 5, 0);
+            t.text = npcTextData.HelloText;
+            t.anchor = TextAnchor.UpperCenter;
+            t.fontSize = 200;
 
-                talking = true;
-            }
+            go.transform.localScale = new Vector3(0.06f, 0.06f, 0.06f);
+            go.transform.SetParent(this.transform);
+            go.transform.position = this.transform.position + new Vector3(0, 5, 0);
+
+            talking = true;
         }
     }
 
@@ -52,6 +61,7 @@ public class NPCInteraction : MonoBehaviour {
                 Destroy(transform.GetChild(i).gameObject,1f);
             }
             talking = false;
+            playerClose = false;
         }
     }
 }
