@@ -3,7 +3,6 @@ using System.Collections;
 
 public class InGameMenuMenager : MonoBehaviour
 {
-    public PlayerControls playerControls;
     public InGameMenu SelectedMenu;
     public GameObject SelectedFullscreenMenu;
 
@@ -13,6 +12,14 @@ public class InGameMenuMenager : MonoBehaviour
     public delegate void OnMenuOpeningHandler(object sender);
     public event OnMenuOpeningHandler OnMenuOpening;
 
+    private PlayerControls playerControls;
+    private CameraControl cameraControl;
+
+    void Start()
+    {
+        playerControls = GameObject.Find("PlayerObject").GetComponent<PlayerControls>();
+        cameraControl = Camera.main.transform.GetComponent<CameraControl>();
+    }
 
     public void LoadMenu(InGameMenu newMenu)
     {
@@ -24,15 +31,21 @@ public class InGameMenuMenager : MonoBehaviour
         SelectedMenu = newMenu;
         SelectedMenu.IsOpen = true;
 
-        playerControls.enabled = false;
+        ChangeEnableOnControls();
 
         OnMenuOpening(this);
+    }
+
+    private void ChangeEnableOnControls()
+    {
+        playerControls.enabled = !playerControls.enabled;
+        cameraControl.enabled = !cameraControl.enabled;
     }
 
     public void CloseMenu()
     {
         CloseSelectedMenu();
-        playerControls.enabled = true;
+        ChangeEnableOnControls();
         OnMenuClosing(this);
     }
 
@@ -49,7 +62,7 @@ public class InGameMenuMenager : MonoBehaviour
         SelectedFullscreenMenu.GetComponent<CanvasGroup>().interactable = true;
         SelectedFullscreenMenu.GetComponent<CanvasGroup>().blocksRaycasts = true;
 
-        playerControls.enabled = false;
+        ChangeEnableOnControls();
 
         OnMenuOpening(this);
     }
@@ -70,5 +83,4 @@ public class InGameMenuMenager : MonoBehaviour
             SelectedFullscreenMenu.GetComponent<CanvasGroup>().blocksRaycasts = false;
         }
     }
-
 }

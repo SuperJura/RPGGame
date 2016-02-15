@@ -9,7 +9,7 @@ public class PlayerControls : MonoBehaviour {
     private Vector3 jumpVelocity;
     private bool jumping = false;   //ako igrac zeli skociti (znaci da ne pada)
 
-    public float rotationSpeed = 500;
+    public float rotationSpeed = 200;
 
     void Start () {
         myTransform = GetComponent<Transform>();
@@ -32,11 +32,11 @@ public class PlayerControls : MonoBehaviour {
         }
         if (Input.GetKey(KeyCode.A))
         {
-            myTransform.Rotate(0, -100 * Time.deltaTime, 0, Space.Self);
+            myTransform.Rotate(0, -rotationSpeed * Time.deltaTime, 0, Space.Self);
         }
         if (Input.GetKey(KeyCode.D))
         {
-            myTransform.Rotate(0, 100 * Time.deltaTime, 0, Space.Self);
+            myTransform.Rotate(0, rotationSpeed * Time.deltaTime, 0, Space.Self);
         }
         if (Input.GetKey(KeyCode.Space) && isGrounded == true)
         {

@@ -13,6 +13,7 @@ public class PlayerMenuControls : MonoBehaviour {
     public InGameMenu EscMenu;
     public InGameMenu InventoryMenu;
     public GameObject CardMenu; //menu je tipa GameObject jer je fullscreen
+    public GameObject WorldMapMenu;
     public GameObject AbilityBookMenu;
 
     void Start()
@@ -35,55 +36,51 @@ public class PlayerMenuControls : MonoBehaviour {
         //samo jedan menu moze biti aktivan na screenu, bilo on fulscreen ili ne
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (isInGameMenuOpen == false)
-            {
-                menuManager.LoadMenu(EscMenu);
-                isInGameMenuOpen = true;
-            }
-            else
-            {
-                menuManager.CloseMenu();
-                isInGameMenuOpen = false;
-            }
+            OpenMenu(EscMenu);
         }
         if (Input.GetKeyDown(KeyCode.I))
         {
-            if (isInGameMenuOpen == false)
-            {
-                menuManager.LoadMenu(InventoryMenu);
-                isInGameMenuOpen = true;
-            }
-            else
-            {
-                menuManager.CloseMenu();
-                isInGameMenuOpen = false;
-            }
+            OpenMenu(InventoryMenu);
         }
         if (Input.GetKeyDown(KeyCode.C))
         {
-            if (isInGameMenuOpen == false)
-            {
-                menuManager.LoadFullScreenMenu(CardMenu);
-                isInGameMenuOpen = true;
-            }
-            else
-            {
-                menuManager.CloseMenu();
-                isInGameMenuOpen = false;
-            }
+            OpenFullScreenMenu(CardMenu);
         }
         if (Input.GetKeyDown(KeyCode.P))
         {
-            if (IsInGameMenuOpen == false)
-            {
-                menuManager.LoadFullScreenMenu(AbilityBookMenu);
-                IsInGameMenuOpen = true;
-            }
-            else
-            {
-                menuManager.CloseMenu();
-                IsInGameMenuOpen = false;
-            }
+            OpenFullScreenMenu(AbilityBookMenu);
         }
-	}
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            OpenFullScreenMenu(WorldMapMenu);
+        }
+    }
+
+    private void OpenMenu(InGameMenu menu)
+    {
+        if (isInGameMenuOpen == false)
+        {
+            menuManager.LoadMenu(menu);
+            isInGameMenuOpen = true;
+        }
+        else
+        {
+            menuManager.CloseMenu();
+            isInGameMenuOpen = false;
+        }
+    }
+
+    private void OpenFullScreenMenu(GameObject menu)
+    {
+        if (IsInGameMenuOpen == false)
+        {
+            menuManager.LoadFullScreenMenu(menu);
+            IsInGameMenuOpen = true;
+        }
+        else
+        {
+            menuManager.CloseMenu();
+            IsInGameMenuOpen = false;
+        }
+    }
 }

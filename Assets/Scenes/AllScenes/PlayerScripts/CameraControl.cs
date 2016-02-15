@@ -6,7 +6,7 @@ public class CameraControl : MonoBehaviour
     public float targetHeight = 1.7f;                                               // Vertical offset adjustment
     public float distance = 12.0f;                                                  // Default Distance
     public float offsetFromWall = 0.1f;                                             // Bring camera away from any colliding objects
-    public float maxDistance = 20;                                          // Maximum zoom Distance
+    public float maxDistance = 60;                                          // Maximum zoom Distance
     public float minDistance = 0.6f;                                                // Minimum zoom Distance
     public float xSpeed = 200.0f;                                                   // Orbit speed (Left/Right)
     public float ySpeed = 200.0f;                                                   // Orbit speed (Up/Down)
@@ -45,7 +45,7 @@ public class CameraControl : MonoBehaviour
         if (Input.GetAxis("Mouse ScrollWheel") < 0)
         {
             minDistance = 10;
-            desiredDistance = 15;
+            desiredDistance = maxDistance;
         }
 
         if (desiredDistance == 10)
