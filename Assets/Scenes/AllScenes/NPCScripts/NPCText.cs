@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class NPCText : MonoBehaviour {
 
     public string HelloText;
     public string GoodbyeText;
+    public float CharacterSize;
 
 	void Start () {
         if (HelloText == "")
@@ -15,10 +15,5 @@ public class NPCText : MonoBehaviour {
         {
             GoodbyeText = "Good luck " + CurrentPlayer.currentPlayer.PlayerName;
         }
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    }
 }

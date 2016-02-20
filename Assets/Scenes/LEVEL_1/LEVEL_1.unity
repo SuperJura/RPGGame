@@ -6318,7 +6318,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 582860415}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: CUbe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6953,6 +6953,7 @@ GameObject:
   - 135: {fileID: 665788925}
   - 114: {fileID: 665788929}
   - 114: {fileID: 665788928}
+  - 114: {fileID: 665788930}
   m_Layer: 0
   m_Name: NPC_Fisherman
   m_TagString: Untagged
@@ -7041,6 +7042,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HelloText: Come back little later, I will teach you how to fish
   GoodbyeText: See you!
+  CharacterSize: 1
+--- !u!114 &665788930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 665788923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cff25ee2cf79b34390b1d13d7239a5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &714119760 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: d30e71206f8164182a5ebaecb3afdb5f, type: 3}
@@ -8124,6 +8137,58 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 839583205}
+--- !u!1 &846463846
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 846463849}
+  - 65: {fileID: 846463848}
+  - 114: {fileID: 846463847}
+  m_Layer: 0
+  m_Name: Cinematic1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &846463847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 846463846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c47c771dad9e8d04ab05c5df5754a6d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &846463848
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 846463846}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &846463849
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 846463846}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.07606752, y: -0.11321675, z: -0.6934526}
+  m_LocalScale: {x: 1.3300278, y: 0.36524782, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2010051288}
+  m_RootOrder: 0
 --- !u!1 &872548744
 GameObject:
   m_ObjectHideFlags: 0
@@ -14067,7 +14132,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1886233630}
   m_Layer: 0
-  m_Name: Enemy (1)
+  m_Name: CUbe1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14943,6 +15008,8 @@ GameObject:
   - 135: {fileID: 2010051286}
   - 23: {fileID: 2010051285}
   - 65: {fileID: 2010051289}
+  - 114: {fileID: 2010051291}
+  - 114: {fileID: 2010051290}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -15004,7 +15071,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 346.9, y: 35.3, z: 384.9}
   m_LocalScale: {x: 113.05753, y: 113.05747, z: 113.05747}
-  m_Children: []
+  m_Children:
+  - {fileID: 846463849}
   m_Father: {fileID: 0}
   m_RootOrder: 5
 --- !u!65 &2010051289
@@ -15019,6 +15087,31 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.94531316, y: 0.2863073, z: 0.95502204}
   m_Center: {x: -0.027343603, y: -0.35684708, z: 0.02248893}
+--- !u!114 &2010051290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2010051284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cff25ee2cf79b34390b1d13d7239a5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2010051291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2010051284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2377de5a49626f74e8cb2856d008f6a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HelloText: Hello
+  GoodbyeText: 
+  CharacterSize: 7
 --- !u!1 &2022055798 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100004, guid: ad5878248fac71a48aa469475023f88a, type: 2}
