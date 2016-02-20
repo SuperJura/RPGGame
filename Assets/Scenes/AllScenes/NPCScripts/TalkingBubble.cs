@@ -36,18 +36,17 @@ class TalkingBubble : MonoBehaviour
 
     public void RemoveBubble()
     {
-        for (int i = 0; i < transform.childCount; i++)
-        {
-            Destroy(transform.GetChild(i).gameObject, 1);
-        }
+        RemoveBubble(1);
     }
 
     public void RemoveBubble(float delay)
     {
         for (int i = 0; i < transform.childCount; i++)
         {
-            Destroy(transform.GetChild(i).gameObject, delay);
+            if (transform.GetChild(i).name == "txtBubble")
+            {
+                Destroy(transform.GetChild(i).gameObject, delay);
+            }
         }
     }
-
 }

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
@@ -16,7 +15,16 @@ public class ChestInteraction : MonoBehaviour {
     void Start () {
         itemDatabase = Repository.GetItemDatabaseInstance();
         chestAnimation = GetComponentInParent<Animation>();
+        manager.OnMenuClosing += Manager_OnMenuClosing;
         isopen = false;
+    }
+
+    private void Manager_OnMenuClosing(object sender)
+    {
+        if (((InGameMenuMenager)sender).SelectedMenu.name == "LootMenu")
+        {
+            isopen = false; //ako se zatvara loot menu, postavi da nije otvoren vise
+        }
     }
 
     void OnTriggerStay(Collider other)
@@ -63,12 +71,11 @@ public class ChestInteraction : MonoBehaviour {
             panel.Find("Panel/ItemName").GetComponentInChildren<Text>().text = e.Name;
             panel.Find("Panel/ItemSlot").GetComponentInChildren<Text>().text = e.Slot.ToString();
             panel.Find("Panel/ItemStaticID").GetComponentInChildren<Text>().text = e.StaticIDEquipment.ToString();
-            Toggle tog = (Toggle)panel.Find("Panel/Take").GetComponent<Toggle>();
+            Toggle tog = panel.Find("Panel/Take").GetComponent<Toggle>();
             tog.onValueChanged.AddListener((on) => PutInInventory(panel, tog));
 
             panel.SetParent(itemList);
         }
-
     }
 
     private void PutInInventory(RectTransform panel, Toggle sender)
@@ -86,11 +93,9 @@ public class ChestInteraction : MonoBehaviour {
 
     void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Player" && isopen == true)
+        if (other.tag == "Player")
         {
             chestAnimation.Play("close");
-            manager.CloseMenu();
-            isopen = false;
         }
     }
 }

@@ -6,48 +6,48 @@ public class StartingLevelCinematic : MonoBehaviour {
 
     Transform cameraTransform;
     CameraControl cameraControl;
+    PlayerControls playerControls;
     Transform cameraParent;
     TalkingBubble talkingBubble;
-    bool isFirstMovementFinished;
-    bool isSecondMovementFinished;
+    GameObject canvas;
 
     void Start () {
         cameraTransform = Camera.main.transform;
         cameraControl = cameraTransform.GetComponent<CameraControl>();
         cameraParent = cameraTransform.parent;
+        playerControls = cameraParent.GetComponent<PlayerControls>();
         talkingBubble = GetComponentInParent<TalkingBubble>();
-        isFirstMovementFinished = false;
-        isSecondMovementFinished = false;
+        canvas = GameObject.Find("Canvas");
     }
 
     void OnTriggerEnter(Collider other)
     {
-        StartCinematic();
-    }
-
-    private void StartCinematic()
-    {
         cameraControl.enabled = false;
+        playerControls.enabled = false;
         cameraTransform.parent = null;
-        StartFirstMovement();
-        StartCoroutine(StartSecondMovement());
-        StartCoroutine(StartFirstSpeech());
+        canvas.SetActive(false);
+        StartCoroutine(StartCinematic());
     }
 
-    private void StartFirstMovement()
+    private IEnumerator StartCinematic()
+    {
+        yield return StartCoroutine(StartFirstMovement());
+        yield return StartCoroutine(StartSecondMovement());
+        yield return StartCoroutine(StartFirstSpeech());
+        yield return StartCoroutine(StartSecondSpeech());
+        ReturnControlToPlayer();
+    }
+
+    private IEnumerator StartFirstMovement()
     {
         StartCoroutine(CameraRotation(new Vector3(26, 70, -10)));
-        StartCoroutine(CameraTranslation(new Vector3(250, 105, 250)));
+        yield return StartCoroutine(CameraTranslation(new Vector3(250, 105, 250)));
     }
     
     private IEnumerator StartSecondMovement()
     {
-        while (isFirstMovementFinished == false)
-        {
-            yield return new WaitForSeconds(1);
-        }
         StartCoroutine(CameraRotation(new Vector3(24, 14, 2)));
-        StartCoroutine(CameraTranslation(new Vector3(300, 135, 250)));
+        yield return StartCoroutine(CameraTranslation(new Vector3(300, 135, 250)));
     }
 
     private IEnumerator CameraRotation(Vector3 targetAngle)
@@ -80,26 +80,12 @@ public class StartingLevelCinematic : MonoBehaviour {
             yield return new WaitForSeconds(0.01f);
         }
         Debug.Log(cameraTransform.position);
-
-        if (!isFirstMovementFinished)
-        {
-            isFirstMovementFinished = true;
-        }
-        else
-        {
-            isSecondMovementFinished = true;
-        }
     }
 
     private IEnumerator StartFirstSpeech()
     {
-        while(isSecondMovementFinished == false)
-        {
-            yield return new WaitForSeconds(1);
-        }
         talkingBubble.ShowBubble();
-        yield return new WaitForSeconds(5);
-        StartCoroutine(StartSecondSpeech());
+        yield return new WaitForSeconds(2);
     }
 
     private IEnumerator StartSecondSpeech()
@@ -107,15 +93,15 @@ public class StartingLevelCinematic : MonoBehaviour {
         talkingBubble.RemoveBubble(0);
         talkingBubble.ShowBubble("You have quest, folow the road");
         yield return new WaitForSeconds(2);
-        talkingBubble.RemoveBubble();
-        ReturnControlToPlayer();
+        talkingBubble.RemoveBubble(0);
     }
 
     private void ReturnControlToPlayer()
     {
-        Debug.Log(cameraParent.name);
         cameraControl.enabled = true;
+        playerControls.enabled = true;
         cameraTransform.SetParent(cameraParent);
+        canvas.SetActive(true);
         Destroy(gameObject);
     }
 }
