@@ -9,7 +9,7 @@ public class StartingLevelCinematic : MonoBehaviour {
     PlayerControls playerControls;
     Transform cameraParent;
     TalkingBubble talkingBubble;
-    GameObject canvas;
+    CanvasGroup canvas;
 
     void Start () {
         cameraTransform = Camera.main.transform;
@@ -17,7 +17,7 @@ public class StartingLevelCinematic : MonoBehaviour {
         cameraParent = cameraTransform.parent;
         playerControls = cameraParent.GetComponent<PlayerControls>();
         talkingBubble = GetComponentInParent<TalkingBubble>();
-        canvas = GameObject.Find("Canvas");
+        canvas = GameObject.Find("Canvas").GetComponent<CanvasGroup>();
     }
 
     void OnTriggerEnter(Collider other)
@@ -25,7 +25,7 @@ public class StartingLevelCinematic : MonoBehaviour {
         cameraControl.enabled = false;
         playerControls.enabled = false;
         cameraTransform.parent = null;
-        canvas.SetActive(false);
+        canvas.alpha = 0;
         StartCoroutine(StartCinematic());
     }
 
@@ -101,7 +101,7 @@ public class StartingLevelCinematic : MonoBehaviour {
         cameraControl.enabled = true;
         playerControls.enabled = true;
         cameraTransform.SetParent(cameraParent);
-        canvas.SetActive(true);
+        canvas.alpha = 1;
         Destroy(gameObject);
     }
 }

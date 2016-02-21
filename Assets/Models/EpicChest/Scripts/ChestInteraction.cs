@@ -67,7 +67,7 @@ public class ChestInteraction : MonoBehaviour {
 
         foreach (Equipment e in items)
         {
-            RectTransform panel = GameObject.Instantiate(prefab);
+            RectTransform panel = Instantiate(prefab);
             panel.Find("Panel/ItemName").GetComponentInChildren<Text>().text = e.Name;
             panel.Find("Panel/ItemSlot").GetComponentInChildren<Text>().text = e.Slot.ToString();
             panel.Find("Panel/ItemStaticID").GetComponentInChildren<Text>().text = e.StaticIDEquipment.ToString();

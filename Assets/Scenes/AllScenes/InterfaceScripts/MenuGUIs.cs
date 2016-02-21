@@ -48,10 +48,10 @@ public class MenuGUIs : MonoBehaviour {
                     card.GetComponent<Image>().color = new Color(78 / 255f, 78 / 255f, 204 / 255f);  //blue
                     break;
                 case Enumerations.EquipmentQuality.Unheard:
-                    card.GetComponent<Image>().color = new Color(255 / 255f, 96 / 255f, 96 / 255f);  //red
+                    card.GetComponent<Image>().color = new Color(255 / 255f, 23 / 255f, 41 / 255f);  //red
                     break;
                 case Enumerations.EquipmentQuality.Legendary:
-                    card.GetComponent<Image>().color = new Color(212 / 255f, 199 / 255f, 48 / 255f); //yellow
+                    card.GetComponent<Image>().color = new Color(0 / 255f, 159 / 255f, 0 / 255f); //green
                     break;
             }
 
@@ -84,16 +84,16 @@ public class MenuGUIs : MonoBehaviour {
             switch (e.Quality)
             {
                 case Enumerations.EquipmentQuality.Common:
-                    panel.Find("Panel/ItemQuality").GetComponentInChildren<Text>().color = Color.white;
+                    panel.Find("Panel/ItemQuality").GetComponentInChildren<Text>().color = Color.black;
                     break;
                 case Enumerations.EquipmentQuality.Rare:
-                    panel.Find("Panel/ItemQuality").GetComponentInChildren<Text>().color = Color.blue;
+                    panel.Find("Panel/ItemQuality").GetComponentInChildren<Text>().color = new Color(78 / 255f, 78 / 255f, 204 / 255f);  //blue
                     break;
                 case Enumerations.EquipmentQuality.Unheard:
-                    panel.Find("Panel/ItemQuality").GetComponentInChildren<Text>().color = Color.green;
+                    panel.Find("Panel/ItemQuality").GetComponentInChildren<Text>().color = new Color(255 / 255f, 23 / 255f, 41 / 255f);  //red
                     break;
                 case Enumerations.EquipmentQuality.Legendary:
-                    panel.Find("Panel/ItemQuality").GetComponentInChildren<Text>().color = Color.yellow;
+                    panel.Find("Panel/ItemQuality").GetComponentInChildren<Text>().color = new Color(0 / 255f, 159 / 255f, 0 / 255f); //green
                     break;
             }
 

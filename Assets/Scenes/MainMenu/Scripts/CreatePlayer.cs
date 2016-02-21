@@ -36,7 +36,7 @@ public class CreatePlayer : MonoBehaviour {
 
         newPlayer.PhysicalDMG = 5;
         newPlayer.MagicDMG = 15;
-        newPlayer.MoveSpeed = 15;
+        newPlayer.MoveSpeed = 20;
         newPlayer.JumpForce = 5;
 
         newPlayer.PhysDMGMultiplication = 1;
@@ -69,7 +69,7 @@ public class CreatePlayer : MonoBehaviour {
 
         newPlayer.PhysicalDMG = 15;
         newPlayer.MagicDMG = 5;
-        newPlayer.MoveSpeed = 15;
+        newPlayer.MoveSpeed = 20;
         newPlayer.JumpForce = 5;
 
         newPlayer.PhysDMGMultiplication = 1;
