@@ -26,7 +26,7 @@ public class Inventory
         get { return equipedHead; }
         set 
         { 
-            OnEquipmentChanged(equipedHead, value);
+            onEquipmentChanged(equipedHead, value);
             equipedHead = value;
         }
     }
@@ -37,7 +37,7 @@ public class Inventory
         get { return equipedShoulders; }
         set
         {
-            OnEquipmentChanged(equipedShoulders, value);
+            onEquipmentChanged(equipedShoulders, value);
             equipedShoulders = value;
         }
     }
@@ -48,7 +48,7 @@ public class Inventory
         get { return equipedChest; }
         set
         {
-            OnEquipmentChanged(equipedChest, value);
+            onEquipmentChanged(equipedChest, value);
             equipedChest = value;
         }
     }
@@ -59,7 +59,7 @@ public class Inventory
         get { return equipedLegs; }
         set
         {
-            OnEquipmentChanged(equipedLegs, value);
+            onEquipmentChanged(equipedLegs, value);
             equipedLegs = value;
         }
     }
@@ -70,7 +70,7 @@ public class Inventory
         get { return equipedFeet; }
         set
         {
-            OnEquipmentChanged(equipedFeet, value);
+            onEquipmentChanged(equipedFeet, value);
             equipedFeet = value;
         }
     }
@@ -81,7 +81,7 @@ public class Inventory
         get { return equipedCardHolder; }
         set
         {
-            OnEquipmentChanged(equipedCardHolder, value);
+            onEquipmentChanged(equipedCardHolder, value);
             equipedCardHolder = value;
         }
     }
@@ -92,7 +92,7 @@ public class Inventory
         get { return equipedWeapon; }
         set
         {
-            OnEquipmentChanged(equipedWeapon, value);
+            onEquipmentChanged(equipedWeapon, value);
             equipedWeapon = value;
         }
     }
@@ -103,7 +103,7 @@ public class Inventory
         get { return equipedOffHand; }
         set
         {
-            OnEquipmentChanged(equipedOffHand, value);
+            onEquipmentChanged(equipedOffHand, value);
             equipedOffHand = value;
         }
     }
@@ -111,7 +111,21 @@ public class Inventory
     
     public delegate void EquipmentChangedHandler(Equipment oldEquip, Equipment newEquip);
     [field: NonSerialized]
-    public event EquipmentChangedHandler OnEquipmentChanged;
+    private EquipmentChangedHandler onEquipmentChanged;
+    public event EquipmentChangedHandler OnEquipmentChanged
+    {
+        add
+        {
+            if (onEquipmentChanged == null)
+            {
+                onEquipmentChanged += value;
+            }
+        }
+        remove
+        {
+            onEquipmentChanged -= value;
+        }
+    }
 
     public delegate void InventoryChangedHandler();
     [field: NonSerialized]
@@ -282,5 +296,4 @@ public class Inventory
         }
         return false;
     }
-
 }

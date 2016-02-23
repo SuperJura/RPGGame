@@ -6,8 +6,8 @@ using System;
 public class PlayerGUI : MonoBehaviour {
 
     public float height = 2;
-    public Canvas myCanvas;
 
+    private Canvas myCanvas;
     private TextMesh myTextMesh;
     private Transform myTransform;
     private PlayerCombat playerCombat;
@@ -16,6 +16,7 @@ public class PlayerGUI : MonoBehaviour {
     private string playerName;
 
     void Start () {
+        myCanvas = GameObject.Find("Canvas").GetComponent<Canvas>();
 
         myTextMesh = GetComponent<TextMesh>();
         playerCombat = GetComponentInParent<PlayerCombat>();
@@ -64,6 +65,13 @@ public class PlayerGUI : MonoBehaviour {
 
     private void FillInfoPanel()
     {
+        System.Diagnostics.StackTrace stackTrace = new System.Diagnostics.StackTrace();
+        Debug.Log(stackTrace.GetFrame(1).GetMethod().Name);
+
+        if (myCanvas == null)   //zbog nekog razloga,ova skripta rusi igru kada se mjenja scena.
+        {
+            return;
+        }
         string charClass = CurrentPlayer.currentPlayer.CharClass.ToString();
         charClass += " " + CurrentPlayer.currentPlayer.PlayerLvl;
         myCanvas.transform.Find("infoPanel/txtClass").GetComponent<Text>().text = charClass;
@@ -81,6 +89,8 @@ public class PlayerGUI : MonoBehaviour {
         string mana = "Mana " + CurrentPlayer.currentPlayer.CurrentMana +
             " / " + CurrentPlayer.currentPlayer.MaxMana;
         myCanvas.transform.Find("infoPanel/txtMana").GetComponent<Text>().text = mana;
+
+        Debug.Log(CurrentPlayer.currentPlayer.MaxHealth);
     }
 
     private void FillNamePlate()

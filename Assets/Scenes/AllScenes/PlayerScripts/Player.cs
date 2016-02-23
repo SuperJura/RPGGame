@@ -132,8 +132,8 @@ public class Player
         
         if (oldEquip != null)
         {
-            MaxHealth -= oldEquip.Health;
-            MaxMana -= oldEquip.Mana;
+            maxHealth -= oldEquip.Health;
+            maxMana -= oldEquip.Mana;
             PhysDMGMultiplication -= oldEquip.PhysDMGMultiplication;
             MagicDMGMultiplication -= oldEquip.MagicDMGMultiplication;
             MoveSpeed -= oldEquip.MoveSpeed;
@@ -141,12 +141,13 @@ public class Player
 
         if (newEquip != null)
         {
-            MaxHealth += newEquip.Health;
-            MaxMana += newEquip.Mana;
+            maxHealth += newEquip.Health;
+            maxMana += newEquip.Mana;
             PhysDMGMultiplication += newEquip.PhysDMGMultiplication;
             MagicDMGMultiplication += newEquip.MagicDMGMultiplication;
             MoveSpeed += newEquip.MoveSpeed;
         }
+        CallOnStatsChanged();
     }
 
     public int CalcPhysDMG()

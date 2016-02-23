@@ -5,14 +5,18 @@ using System;
 
 public class MenuGUIs : MonoBehaviour {
 
-    public Transform CardItemList;
-    public Transform InventoryItemList;  //inventory panel
-    public Transform AbilityBookMenu;
+    private Transform CardItemList;
+    private Transform InventoryItemList;  //inventory panel
+    private Transform AbilityBookMenu;
 
     private char selectedOrder; // n=byName, q=byQuality, s=bySlot
     
     void Start ()
     {
+        CardItemList = GameObject.Find("Canvas/CardMenu/MainPanel/Cards/CardList/Cards").transform;
+        InventoryItemList = GameObject.Find("Canvas/InventoryMenu/MainPanel/Items/ItemList/Items").transform;
+        AbilityBookMenu = GameObject.Find("Canvas/AbilityBookMenu/MainPanel/Pages").transform;
+
         CurrentPlayer.currentPlayer.PlayerInventory.OnInventoryChanged += PlayerInventory_OnInventoryChanged;
         CurrentPlayer.currentPlayer.OnLevelUp += CurrentPlayer_OnLevelUp;
 

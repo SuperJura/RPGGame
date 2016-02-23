@@ -22,7 +22,7 @@ public static class LoadLevels {
     {
        Player newPlayer = CreatePlayer.CreateNewPlayer(charClass, playerName, M_F);
        CurrentPlayer.currentPlayer = newPlayer;
-        SceneManager.LoadScene("LEVEL_1");
+       SceneManager.LoadScene("LEVEL_1");
     }
 
     public static void LoadSavedGame(string path)
@@ -36,5 +36,9 @@ public static class LoadLevels {
         fs.Close();
 
         LoadLevel(p.IDLevel);
+    }
+    public static void LoadOpenWorld()
+    {
+        SceneManager.LoadScene("OpenWorldScene");
     }
 }

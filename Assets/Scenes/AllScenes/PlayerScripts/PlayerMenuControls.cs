@@ -9,17 +9,30 @@ public class PlayerMenuControls : MonoBehaviour {
         set { isInGameMenuOpen = value; }
     }
 
-    public InGameMenuMenager menuManager;
-    public InGameMenu EscMenu;
-    public InGameMenu InventoryMenu;
-    public GameObject CardMenu; //menu je tipa GameObject jer je fullscreen
-    public GameObject WorldMapMenu;
-    public GameObject AbilityBookMenu;
+    private InGameMenuMenager menuManager;
+    private InGameMenu EscMenu;
+    private InGameMenu InventoryMenu;
+    private GameObject CardMenu; //menu je tipa GameObject jer je fullscreen
+    private GameObject WorldMapMenu;
+    private GameObject AbilityBookMenu;
 
     void Start()
     {
+        InitializeMenus();
+
         menuManager.OnMenuClosing += menuManager_OnMenuClosing;
         menuManager.OnMenuOpening += menuManager_OnMenuOpening;
+    }
+
+    private void InitializeMenus()
+    {
+        Transform canvas = GameObject.Find("Canvas").transform;
+        menuManager = canvas.GetComponent<InGameMenuMenager>();
+        EscMenu = canvas.Find("EscMenu").GetComponent<InGameMenu>();
+        InventoryMenu = canvas.Find("InventoryMenu").GetComponent<InGameMenu>();
+        CardMenu = canvas.Find("CardMenu").gameObject;
+        WorldMapMenu = canvas.Find("WorldMapMenu").gameObject;
+        AbilityBookMenu = canvas.Find("AbilityBookMenu").gameObject;
     }
 
     void menuManager_OnMenuOpening(object sender)

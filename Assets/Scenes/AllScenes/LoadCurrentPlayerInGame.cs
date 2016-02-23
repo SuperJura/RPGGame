@@ -42,8 +42,8 @@ public class LoadCurrentPlayerInGame : MonoBehaviour {
         }
         player = CurrentPlayer.currentPlayer;
 
-        Vector3 newPosition = new Vector3(player.PosX, player.PosY, player.PosZ);
-        transform.position = newPosition;
+        //Vector3 newPosition = new Vector3(player.PosX, player.PosY, player.PosZ);
+        //transform.position = newPosition;
 
         switch (player.CharClass)
         {
