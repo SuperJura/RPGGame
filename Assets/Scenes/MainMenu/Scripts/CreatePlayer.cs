@@ -42,7 +42,7 @@ public class CreatePlayer : MonoBehaviour {
         newPlayer.PhysDMGMultiplication = 1;
         newPlayer.MagicDMGMultiplication = 1;
 
-        newPlayer.IDLevel = 1;
+        newPlayer.CurrentSceneName = "LEVEL_1";
         newPlayer.PosX = 179.5f;
         newPlayer.PosY = 5.6f;
         newPlayer.PosZ = 10.3f;
@@ -75,7 +75,7 @@ public class CreatePlayer : MonoBehaviour {
         newPlayer.PhysDMGMultiplication = 1;
         newPlayer.MagicDMGMultiplication = 1;
 
-        newPlayer.IDLevel = 1;
+        newPlayer.CurrentSceneName = "LEVEL_1";
         newPlayer.PosX = 179.5f;
         newPlayer.PosY = 5.6f;
         newPlayer.PosZ = 10.3f;

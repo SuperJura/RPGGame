@@ -452,6 +452,7 @@ GameObject:
   - 114: {fileID: 11479826}
   - 114: {fileID: 11475420}
   - 225: {fileID: 22546948}
+  - 114: {fileID: 11430002}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2162,6 +2163,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 2
+--- !u!114 &11430002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 137778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0c76dff6738e9946bf9ca92a4ad143d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11430042
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3619,7 +3631,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 11430002}
         m_MethodName: SavePlayerAndExit
         m_Mode: 1
         m_Arguments:
@@ -3892,7 +3904,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 11430002}
         m_MethodName: SavePlayerAndLoadMainMenu
         m_Mode: 1
         m_Arguments:

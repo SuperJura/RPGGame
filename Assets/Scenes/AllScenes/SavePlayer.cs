@@ -23,7 +23,7 @@ public class SavePlayer : MonoBehaviour {
 
     private void SavePlayerInDat()
     {
-        player = GetComponent<Transform>();
+        player = GameObject.Find("PlayerObject").transform;
 
         CurrentPlayer.currentPlayer.PosX = player.position.x;
         CurrentPlayer.currentPlayer.PosY = player.position.y;

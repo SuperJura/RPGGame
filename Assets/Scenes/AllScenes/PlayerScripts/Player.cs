@@ -13,7 +13,7 @@ public class Player
 
     public string PathToSave { get; set; }
 
-    public int IDLevel { get; set; }
+    public string CurrentSceneName { get; set; }
     public float PosX { get; set; }
     public float PosY { get; set; }
     public float PosZ { get; set; }

@@ -8,9 +8,9 @@ using UnityEngine.SceneManagement;
 public static class LoadLevels {
 
 
-    public static void LoadLevel(int lvl)
+    public static void LoadLevel(string scene)
     {
-        SceneManager.LoadScene("LEVEL_" + lvl);
+        SceneManager.LoadScene(scene);
     }
 
     public static void LoadMainMenu()
@@ -35,7 +35,7 @@ public static class LoadLevels {
         fs.Flush();
         fs.Close();
 
-        LoadLevel(p.IDLevel);
+        LoadLevel(p.CurrentSceneName);
     }
     public static void LoadOpenWorld()
     {

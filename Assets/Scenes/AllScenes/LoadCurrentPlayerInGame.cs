@@ -2,7 +2,7 @@
 
 public class LoadCurrentPlayerInGame : MonoBehaviour {
 
-    private Player player;
+    private Player player;  //samo pomocna varijabla da se ne pise dugi propertyji
 
     void Awake()
     {
@@ -13,7 +13,7 @@ public class LoadCurrentPlayerInGame : MonoBehaviour {
             CurrentPlayer.currentPlayer.CharClass = Enumerations.CharClass.Mage;
             CurrentPlayer.currentPlayer.Class = new MageClass();
             CurrentPlayer.currentPlayer.Gender = Enumerations.Gender.Male;
-            CurrentPlayer.currentPlayer.IDLevel = 1;
+            CurrentPlayer.currentPlayer.CurrentSceneName = "LEVEL_1";
             CurrentPlayer.currentPlayer.IDPlayer = -1;
             CurrentPlayer.currentPlayer.JumpForce = 6;
             CurrentPlayer.currentPlayer.MagicDMG = 50;
@@ -24,9 +24,9 @@ public class LoadCurrentPlayerInGame : MonoBehaviour {
             CurrentPlayer.currentPlayer.MoveSpeed = 50;
             CurrentPlayer.currentPlayer.PhysicalDMG = 10;
             CurrentPlayer.currentPlayer.PlayerName = "me";
-            CurrentPlayer.currentPlayer.PosX = 270;
-            CurrentPlayer.currentPlayer.PosY = 15;
-            CurrentPlayer.currentPlayer.PosZ = 250;
+            CurrentPlayer.currentPlayer.PosX = 180;
+            CurrentPlayer.currentPlayer.PosY = 160;
+            CurrentPlayer.currentPlayer.PosZ = 55;
             CurrentPlayer.currentPlayer.PlayerLvl = 1;
             CurrentPlayer.currentPlayer.Experience = 550;
             CurrentPlayer.currentPlayer.PathToSave = Application.dataPath + "\\Saves\\PlayerTest.save";
@@ -40,10 +40,10 @@ public class LoadCurrentPlayerInGame : MonoBehaviour {
         {
             CurrentPlayer.currentPlayer.PlayerInventory.OnEquipmentChanged += CurrentPlayer.currentPlayer.CalcNewEquiped;
         }
-        player = CurrentPlayer.currentPlayer;
 
-        //Vector3 newPosition = new Vector3(player.PosX, player.PosY, player.PosZ);
-        //transform.position = newPosition;
+        player = CurrentPlayer.currentPlayer;
+        Vector3 newPosition = new Vector3(player.PosX, player.PosY, player.PosZ);
+        transform.position = newPosition;
 
         switch (player.CharClass)
         {
@@ -56,6 +56,5 @@ public class LoadCurrentPlayerInGame : MonoBehaviour {
             default:
                 break;
         }
-        
-	}
+    }
 }
