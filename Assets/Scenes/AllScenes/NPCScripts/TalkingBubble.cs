@@ -30,8 +30,8 @@ class TalkingBubble : MonoBehaviour
 
         go.transform.localScale = new Vector3(0.06f, 0.06f, 0.06f);
         go.transform.SetParent(transform);
-        float meshHeight = transform.localScale.y - transform.position.y;
-        go.transform.position = transform.position + new Vector3(0, meshHeight + 5, 0);
+        float meshHeight = GetComponent<Renderer>().bounds.size.y;
+        go.transform.position = transform.position + new Vector3(0, meshHeight + 1, 0);
     }
 
     public void RemoveBubble()

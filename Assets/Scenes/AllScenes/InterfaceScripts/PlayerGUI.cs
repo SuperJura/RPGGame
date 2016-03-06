@@ -89,8 +89,6 @@ public class PlayerGUI : MonoBehaviour {
         string mana = "Mana " + CurrentPlayer.currentPlayer.CurrentMana +
             " / " + CurrentPlayer.currentPlayer.MaxMana;
         myCanvas.transform.Find("infoPanel/txtMana").GetComponent<Text>().text = mana;
-
-        Debug.Log(CurrentPlayer.currentPlayer.MaxHealth);
     }
 
     private void FillNamePlate()

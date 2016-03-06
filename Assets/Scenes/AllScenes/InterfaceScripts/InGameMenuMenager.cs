@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class InGameMenuMenager : MonoBehaviour
 {
@@ -12,12 +11,12 @@ public class InGameMenuMenager : MonoBehaviour
     public delegate void OnMenuOpeningHandler(object sender);
     public event OnMenuOpeningHandler OnMenuOpening;
 
-    private PlayerControls playerControls;
+    private PlayerMovementControls playerControls;
     private CameraControl cameraControl;
 
     void Start()
     {
-        playerControls = GameObject.Find("PlayerObject").GetComponent<PlayerControls>();
+        playerControls = GameObject.Find("PlayerObject").GetComponent<PlayerMovementControls>();
         cameraControl = Camera.main.transform.GetComponent<CameraControl>();
     }
 
@@ -34,6 +33,19 @@ public class InGameMenuMenager : MonoBehaviour
         ChangeEnableOnControls();
 
         OnMenuOpening(this);
+    }
+
+    public void ToggleMinimap(GameObject minimap)
+    {
+        CanvasGroup canvasGroup = minimap.GetComponent<CanvasGroup>();
+        if (canvasGroup.alpha == 1)
+        {
+            canvasGroup.alpha = 0;
+        }
+        else
+        {
+            canvasGroup.alpha = 1;
+        }
     }
 
     private void ChangeEnableOnControls()

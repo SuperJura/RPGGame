@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class PlayerMenuControls : MonoBehaviour {
 
@@ -10,16 +11,20 @@ public class PlayerMenuControls : MonoBehaviour {
     }
 
     private InGameMenuMenager menuManager;
-    private InGameMenu EscMenu;
-    private InGameMenu InventoryMenu;
-    private GameObject CardMenu; //menu je tipa GameObject jer je fullscreen
-    private GameObject WorldMapMenu;
-    private GameObject AbilityBookMenu;
+    private InGameMenu escMenu;
+    private InGameMenu inventoryMenu;
+    private GameObject cardMenu; //menu je tipa GameObject jer je fullscreen
+    private GameObject worldMapMenu;
+    private GameObject abilityBookMenu;
+
+    private GameObject minimapFrame;
+    private Camera minimapCamera;
 
     void Start()
     {
         InitializeMenus();
 
+        minimapCamera = transform.Find("MinimapCamera").GetComponent<Camera>();
         menuManager.OnMenuClosing += menuManager_OnMenuClosing;
         menuManager.OnMenuOpening += menuManager_OnMenuOpening;
     }
@@ -28,11 +33,12 @@ public class PlayerMenuControls : MonoBehaviour {
     {
         Transform canvas = GameObject.Find("Canvas").transform;
         menuManager = canvas.GetComponent<InGameMenuMenager>();
-        EscMenu = canvas.Find("EscMenu").GetComponent<InGameMenu>();
-        InventoryMenu = canvas.Find("InventoryMenu").GetComponent<InGameMenu>();
-        CardMenu = canvas.Find("CardMenu").gameObject;
-        WorldMapMenu = canvas.Find("WorldMapMenu").gameObject;
-        AbilityBookMenu = canvas.Find("AbilityBookMenu").gameObject;
+        escMenu = canvas.Find("EscMenu").GetComponent<InGameMenu>();
+        inventoryMenu = canvas.Find("InventoryMenu").GetComponent<InGameMenu>();
+        cardMenu = canvas.Find("CardMenu").gameObject;
+        worldMapMenu = canvas.Find("WorldMapMenu").gameObject;
+        abilityBookMenu = canvas.Find("AbilityBookMenu").gameObject;
+        minimapFrame = canvas.Find("MinimapFrame").gameObject;
     }
 
     void menuManager_OnMenuOpening(object sender)
@@ -49,24 +55,34 @@ public class PlayerMenuControls : MonoBehaviour {
         //samo jedan menu moze biti aktivan na screenu, bilo on fulscreen ili ne
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            OpenMenu(EscMenu);
+            OpenMenu(escMenu);
         }
         if (Input.GetKeyDown(KeyCode.I))
         {
-            OpenMenu(InventoryMenu);
+            OpenMenu(inventoryMenu);
         }
         if (Input.GetKeyDown(KeyCode.C))
         {
-            OpenFullScreenMenu(CardMenu);
+            OpenFullScreenMenu(cardMenu);
         }
         if (Input.GetKeyDown(KeyCode.P))
         {
-            OpenFullScreenMenu(AbilityBookMenu);
+            OpenFullScreenMenu(abilityBookMenu);
         }
         if (Input.GetKeyDown(KeyCode.M))
         {
-            OpenFullScreenMenu(WorldMapMenu);
+            OpenFullScreenMenu(worldMapMenu);
         }
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            OpenMinimap();
+        }
+    }
+
+    private void OpenMinimap()
+    {
+        menuManager.ToggleMinimap(minimapFrame);
+        minimapCamera.enabled = !minimapCamera.enabled;
     }
 
     private void OpenMenu(InGameMenu menu)

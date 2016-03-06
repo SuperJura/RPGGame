@@ -6,7 +6,7 @@ public static class OpenWorldSpawnPoints {
 
     static OpenWorldSpawnPoints()
     {
-        southSpawn = new Coordinates() { x = 299, y = 158, z = 1 };
+        southSpawn = new Coordinates() { x = 299, y = 158, z = 5 };
     }
 
     public class Coordinates

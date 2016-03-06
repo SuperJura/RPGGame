@@ -6,7 +6,8 @@ public class StartingLevelCinematic : MonoBehaviour {
 
     Transform cameraTransform;
     CameraControl cameraControl;
-    PlayerControls playerControls;
+    PlayerMovementControls playerControls;
+    PlayerMenuControls playerMenuControls;
     Transform cameraParent;
     TalkingBubble talkingBubble;
     CanvasGroup canvas;
@@ -15,7 +16,8 @@ public class StartingLevelCinematic : MonoBehaviour {
         cameraTransform = Camera.main.transform;
         cameraControl = cameraTransform.GetComponent<CameraControl>();
         cameraParent = cameraTransform.parent;
-        playerControls = cameraParent.GetComponent<PlayerControls>();
+        playerControls = cameraParent.GetComponent<PlayerMovementControls>();
+        playerMenuControls = cameraParent.GetComponent<PlayerMenuControls>();
         talkingBubble = GetComponentInParent<TalkingBubble>();
         canvas = GameObject.Find("Canvas").GetComponent<CanvasGroup>();
     }
@@ -24,6 +26,7 @@ public class StartingLevelCinematic : MonoBehaviour {
     {
         cameraControl.enabled = false;
         playerControls.enabled = false;
+        playerMenuControls.enabled = false;
         cameraTransform.parent = null;
         canvas.alpha = 0;
         StartCoroutine(StartCinematic());
@@ -100,6 +103,7 @@ public class StartingLevelCinematic : MonoBehaviour {
     {
         cameraControl.enabled = true;
         playerControls.enabled = true;
+        playerMenuControls.enabled = true;
         cameraTransform.SetParent(cameraParent);
         canvas.alpha = 1;
         Destroy(gameObject);
